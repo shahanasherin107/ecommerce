@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom'
 const Admin = () => {
   return (
     <div>
+       
       <AppBar>
         <Toolbar>
+          <h4>Shoppee</h4>
             <Link to='/add'>
         <Button variant='contained'>Add</Button>
         </Link> &nbsp; &nbsp;

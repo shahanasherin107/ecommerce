@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 
 const Productlist = () => {
   var[product,setProduct]=useState([])
-          axios.get("https://fakestoreapi.com/products")
+          axios.get("http://localhost:3004/view")
           .then((res)=>{
               console.log(res.data)
               setProduct(res.data)
@@ -30,15 +30,15 @@ const Productlist = () => {
               <Card sx={{ maxWidth: 300 }}>
             <CardMedia
               sx={{ height: 250 }}
-              image={val.image}
+              image={val.Image}
               title="product image"
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-                {val.title}
+                {val.ProductName}
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {val.description}
+                {val.Description}
               </Typography>
             </CardContent>
             <CardActions>

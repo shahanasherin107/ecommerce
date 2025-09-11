@@ -3,8 +3,8 @@ const mongoose = require('mongoose')
 var schema=mongoose.Schema({
     ProductName:String,
     Description:String,
-    Price:Number,
+    Price:String,
     Image:String
 })
-var userModel=mongoose.model("product",schema)
-module.exports=productspace
+var productModel=mongoose.model("product",schema)
+module.exports=productModel

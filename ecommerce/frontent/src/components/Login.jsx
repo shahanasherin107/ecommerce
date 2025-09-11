@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import React, { useState } from 'react'
 import { Button, TextField } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const Login = () => {
   const [input, setInput] = useState({ Email: "", Password: "" })
@@ -13,7 +14,7 @@ const Login = () => {
   }
 
   const loginHandler = () => {
-    axios.post("http://localhost:3004/", input)
+    axios.post("http://localhost:3004/login", input)
       .then((res) => {
         alert(res.data.message)
         console.log(res.data.message)
@@ -27,9 +28,9 @@ const Login = () => {
         }))
           
           if (res.data.userType === "admin") {
-            navigate("/admin");
+            navigate("/admn");
           } else {
-            navigate("/user");
+            navigate("/prdct");
           }
         }
       })
@@ -65,7 +66,7 @@ const Login = () => {
        </Link>&nbsp;
              
         
-      <Button variant='cotained' onClick={loginHandler}>Login</Button>
+      <Button variant='contained' onClick={loginHandler}>Login</Button>
               
                  
     </div>

@@ -33,7 +33,7 @@ const Add = () => {
     .then((res)=>{
       console.log(res.data.message)
       alert(res.data.message)
-      navigate("/")
+    
      })
     }
      else{
@@ -41,7 +41,7 @@ const Add = () => {
     .then((res)=>{
       console.log(res.data.message)
       alert(res.data.message)
-      navigate("/")
+     
     })
      }
   }
@@ -50,14 +50,15 @@ const Add = () => {
     <div>
       <Admin/>
         <Typography variant='h4'>Add Product</Typography><br />
+
         <TextField variant='outlined' label="Product Name"
         name="ProductName" value={input.ProductName} onChange={inputHandeler} /><br /><br />
 
-         <TextField variant='outlined' label="Price"
-         name="Price" value={input.Price} onChange={inputHandeler}/><br /><br />
-
           <TextField variant='outlined' label="Description"
           name="Description" value={input.Description} onChange={inputHandeler}/><br /><br />
+
+           <TextField variant='outlined' label="Price"
+         name="Price" value={input.Price} onChange={inputHandeler}/><br /><br />
 
            <TextField variant='outlined' label="Image"
            name="Image" value={input.Image} onChange={inputHandeler}/><br /><br />
