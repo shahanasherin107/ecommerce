@@ -6,5 +6,5 @@ var schema=mongoose.Schema({
     Price:Number,
     Image:String
 })
-var userModel=mongoose.model("cart",schema)
-module.exports=cartspace
+var cartModel=mongoose.model("cart",schema)
+module.exports=cartModel

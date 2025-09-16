@@ -13,12 +13,19 @@ import { Link } from 'react-router-dom';
 
 
 const Productlist = () => {
-  var[product,setProduct]=useState([])
+  var[product,setProduct]=useState([]);
+      
           axios.get("http://localhost:3004/view")
           .then((res)=>{
               console.log(res.data)
               setProduct(res.data)
           })
+
+           const addToCart = (product) => {
+    axios.post("http://localhost:3004/addcart", product)
+      .then(() => alert("Added to Cart!"))
+      .catch((err) => console.error(err));
+  };
   return (
     <div>
       <br/><br/>
@@ -40,13 +47,16 @@ const Productlist = () => {
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                 {val.Description}
               </Typography>
+               <Typography gutterBottom variant="h5" component="div">
+                ₹{val.Price}
+              </Typography>
             </CardContent>
             <CardActions>
               <Link to='/wl'>
               <Button size="small">wishlist</Button>
               </Link>
               <Link to='/crt'>
-              <Button size="small">add to cart</Button>
+              <Button size="small" onClick={() => addToCart(val)}>add to cart</Button>
               </Link>
             </CardActions>
           </Card>)

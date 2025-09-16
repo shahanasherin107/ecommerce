@@ -89,6 +89,32 @@ try {
 }
 })
 
+//add cart
+const cartModel = require("./model/cart");
+
+app.post("/addcart", async (req, res) => {
+  try {
+    await cartModel.create(req.body);
+    res.send({ message: "product added to cart!!" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Error adding product to cart" });
+  }
+});
+
+//  delete from cart
+app.delete("/cart/:id", async (req, res) => {
+  try {
+    await cartModel.findByIdAndDelete(req.params.id);
+    res.status(200).send({ message: "Product removed from cart" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Error removing product" });
+  }
+});
+
+
+
 //port setting
 app.listen(3004,()=>{
     console.log("port is running")
