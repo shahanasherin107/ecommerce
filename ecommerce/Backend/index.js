@@ -89,7 +89,7 @@ try {
 }
 })
 
-//add cart
+//add to cart
 const cartModel = require("./model/cart");
 
 app.post("/addcart", async (req, res) => {
@@ -101,6 +101,19 @@ app.post("/addcart", async (req, res) => {
     res.status(500).send({ message: "Error adding product to cart" });
   }
 });
+
+//get cart
+
+app.get("/cart", async (req, res) => {
+  try {
+    const cartItems = await cartModel.find();
+    res.send(cartItems);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Error fetching cart items" });
+  }
+});
+
 
 //  delete from cart
 app.delete("/cart/:id", async (req, res) => {

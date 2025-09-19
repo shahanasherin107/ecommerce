@@ -7,14 +7,18 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
-import { Grid } from '@mui/material';
+import { Box, Divider, Grid } from '@mui/material';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useActionData, useNavigate } from 'react-router-dom';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 
 const Cart = () => {
   const [cart, setCart] = useState([]);
+  const [subtotal, setSubtotal] = useState(0);
+  const [shipping] = useState(50)
+  const [total, setTotal] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchCart();
@@ -34,7 +38,17 @@ const Cart = () => {
       })
       .catch((err) => console.error(err));
   };
+
+  useEffect(() => {
+    let sub = cart.reduce((acc, val) => acc + Number(val.Price), 0);
+    setSubtotal(sub);
+    setTotal(sub+shipping); 
+  }, [cart]);
   
+   const goToPayment = () => {
+    navigate("/pymnt", { state: { total } });
+  };
+
  
   return (
     <div>
@@ -74,6 +88,37 @@ const Cart = () => {
           
                })}
             </Grid>
+
+
+              <Box
+            sx={{
+              mt: 4,
+              p: 3,
+              border: "1px solid #ddd",
+              borderRadius: 2,
+              maxWidth: 400,
+              ml: "auto",
+              boxShadow: 2,
+            }}
+          >
+            <Typography variant="h6">Price Details</Typography>
+            <Divider sx={{ my: 2 }} />
+            <Typography variant="body1">Subtotal: ₹{subtotal}</Typography>
+             <Typography variant="body1">Shipping Charge: ₹{shipping} </Typography>
+            <Typography variant="h6" sx={{ mt: 1 }}>
+              Total: ₹{total}
+            </Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{ mt: 3 }}
+              onClick={goToPayment}
+            >
+              Proceed to Pay
+            </Button>
+         
+    </Box>
 
     </div>
   )
