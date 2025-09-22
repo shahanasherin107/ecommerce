@@ -53,16 +53,20 @@ const Cart = () => {
   return (
     <div>
       <NavBar/>
-      <h3>My Cart</h3>
+      <Box sx={{ textAlign: "center", mt: 10, mb: 4 }}>
+        <Typography variant="h4" sx={{ fontWeight: "bold", color: "var(--color-primary)" }}>
+          My Cart
+        </Typography>
+      </Box>
 
-        <Grid container spacing={2}>
+        <Grid container spacing={3}  justifyContent="center">
        
        {cart.map((val)=>{
               return(
-                
-              <Card sx={{ maxWidth: 300 }}>
+               
+              <Card item xs={12} sm={6} md={4} lg={3} key={val._id}>
             <CardMedia
-              sx={{ height: 250 }}
+              sx={{ height: 220 }}
               image={val.Image}
               title="product image"
             />
@@ -70,16 +74,18 @@ const Cart = () => {
               <Typography gutterBottom variant="h5" component="div">
                 {val.ProductName}
               </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+              <Typography variant="body2" sx={{ color: "text.secondary", mb: 1 }}>
                 {val.Description}
               </Typography>
-               <Typography gutterBottom variant="h5" component="div">
+               <Typography gutterBottom variant="h5" component="div" sx={{ color: "var(--color-primary)" }}>
                 ₹{val.Price}
               </Typography>
             </CardContent>
             <CardActions>
              
-              <Button size="small" color='error' onClick={()=>removeFromCart(val._id)}>
+              <Button  variant="outlined"
+                  color="error"
+                  fullWidth  onClick={()=>removeFromCart(val._id)}>
                 <DeleteOutlineOutlinedIcon/>Delete</Button>
               
           
@@ -87,32 +93,36 @@ const Cart = () => {
           </Card>)
           
                })}
-            </Grid>
+            </Grid >
 
 
               <Box
-            sx={{
-              mt: 4,
-              p: 3,
-              border: "1px solid #ddd",
-              borderRadius: 2,
-              maxWidth: 400,
-              ml: "auto",
-              boxShadow: 2,
-            }}
-          >
-            <Typography variant="h6">Price Details</Typography>
+           sx={{
+          mt: 6,
+          p: 3,
+          border: "1px solid #ddd",
+          borderRadius: 2,
+          maxWidth: 400,
+          mx: "auto",
+          boxShadow: 3,
+          backgroundColor: "white",
+        }}
+          > 
+            <Typography variant="h6" sx={{ fontWeight: "bold" }}>Price Details</Typography>
             <Divider sx={{ my: 2 }} />
             <Typography variant="body1">Subtotal: ₹{subtotal}</Typography>
              <Typography variant="body1">Shipping Charge: ₹{shipping} </Typography>
-            <Typography variant="h6" sx={{ mt: 1 }}>
+            <Typography variant="h6" sx={{ mt: 1, color: "var(--color-primary)" }}>
               Total: ₹{total}
             </Typography>
             <Button
               variant="contained"
-              color="primary"
-              fullWidth
-              sx={{ mt: 3 }}
+          fullWidth
+          sx={{
+            mt: 3,
+            backgroundColor: "var(--color-accent)",
+            "&:hover": { backgroundColor: "var(--color-highlight)" },
+          }}
               onClick={goToPayment}
             >
               Proceed to Pay

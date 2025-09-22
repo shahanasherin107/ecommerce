@@ -1,11 +1,24 @@
+/* 🎨 Theme Variables */
+:root {
+  --color-background: #FAF3E0;
+  --color-primary: #8D6E63;
+  --color-accent: #D4A373;
+  --color-highlight: #A5B68D;
+  --color-text: #333333;
+  --color-text-light: #666666;
+}
+
+/* Base container */
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 4rem;
   text-align: center;
-
+  background-color: var(--color-background);
+  color: var(--color-text);
 }
 
+/* Logo styles */
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -13,12 +26,13 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em var(--color-accent));
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em var(--color-highlight));
 }
 
+/* Logo spin */
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -34,10 +48,48 @@
   }
 }
 
+/* Card */
 .card {
   padding: 2em;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  color: var(--color-text);
 }
 
+/* Docs link */
 .read-the-docs {
-  color: #888;
+  color: var(--color-text-light);
+}
+.products-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.price {
+  font-weight: bold;
+  color: var(--color-primary);
+  margin-top: 0.5rem;
 }

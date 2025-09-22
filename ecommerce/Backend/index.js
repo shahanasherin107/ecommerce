@@ -45,7 +45,26 @@ app.post("/login", async (req, res) => {
   }
 });
 
-//add api
+
+app.get('/user/:email', async (req, res) => {
+  try {
+    const user = await userModel.findOne({ Email: req.params.email });
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
+
+
+
+
+//add prdct
 const productModel = require("./model/product");
 
 app.post("/add", async (req, res) => {
@@ -58,7 +77,7 @@ app.post("/add", async (req, res) => {
   }
 });
 
-//view api
+//view prdct
 app.get("/view",async(req,res)=>{
 try {
     var data=await productModel.find()
@@ -69,7 +88,7 @@ try {
 }
 })
 
-//Delete api
+//Delete prdct
 app.delete("/delete/:id",async(req,res)=>{
 try {
     await productModel.findByIdAndDelete(req.params.id)
@@ -79,7 +98,7 @@ try {
 }
 })
 
-//update api
+//update prdct
 app.put("/update/:id",async(req,res)=>{
 try {
     await productModel.findByIdAndUpdate(req.params.id,req.body)
@@ -123,6 +142,87 @@ app.delete("/cart/:id", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send({ message: "Error removing product" });
+  }
+});
+
+const orderModel = require("./model/order");
+
+// place order (after payment success)
+app.post("/order", async (req, res) => {
+  try {
+    const newOrder = await orderModel.create(req.body);
+    res.send({ message: "Order placed successfully!", order: newOrder });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Error placing order" });
+  }
+});
+
+// get all orders with user details
+app.get("/order", async (req, res) => {
+  try {
+    const orders = await orderModel.find().populate("userId", "Name Email");
+    res.send(orders);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Error fetching orders" });
+  }
+});
+
+const wishlistModel = require("./model/wishlist");
+
+//  Add to wishlist
+app.post("/addwishlist", async (req, res) => {
+  try {
+    await wishlistModel.create(req.body);
+    res.send({ message: "Product added to wishlist!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Error adding product to wishlist" });
+  }
+});
+
+//  Get wishlist (all)
+app.get("/wishlist", async (req, res) => {
+  try {
+    const wishlistItems = await wishlistModel.find().populate("userId", "Name Email");
+    res.send(wishlistItems);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Error fetching wishlist items" });
+  }
+});
+
+//  Remove from wishlist
+app.delete("/wishlist/:id", async (req, res) => {
+  try {
+    await wishlistModel.findByIdAndDelete(req.params.id);
+    res.status(200).send({ message: "Product removed from wishlist" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Error removing product from wishlist" });
+  }
+});
+
+//  Get all users
+app.get("/users", async (req, res) => {
+  try {
+    const users = await userModel.find();
+    res.send(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Error fetching users" });
+  }
+});
+
+// Delete user by ID
+app.delete("/users/:id", async (req, res) => {
+  try {
+    await userModel.findByIdAndDelete(req.params.id);
+    res.send({ message: "User deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Error deleting user" });
   }
 });
 

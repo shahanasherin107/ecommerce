@@ -12,6 +12,7 @@ import NavBar from './NavBar';
 import { Link } from 'react-router-dom';
 
 
+
 const Productlist = () => {
   var[product,setProduct]=useState([]);
       
@@ -26,44 +27,64 @@ const Productlist = () => {
       .then(() => alert("Added to Cart!"))
       .catch((err) => console.error(err));
   };
+
+  const addToWishlist = (product) => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  axios.post("http://localhost:3004/addwishlist", {
+    ...product,
+    userId: user.id,
+  })
+    .then(() => alert("Added to Wishlist!"))
+    .catch((err) => console.error(err));
+};
+
   return (
     <div>
+      <NavBar/>
       <br/><br/>
-       <Grid container spacing={2}>
+       <Grid container spacing={3} justifyContent="center" sx={{ padding: "2rem" }}>
        
        {product.map((val)=>{
               return(
                 
-              <Card sx={{ maxWidth: 300 }}>
+              <Card sx={{ maxWidth: 300, borderRadius: "12px", boxShadow: 3 }}>
             <CardMedia
               sx={{ height: 250 }}
               image={val.Image}
               title="product image"
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography gutterBottom variant="h5" component="div" sx={{ fontWeight: "bold", color: "var(--color-primary)" }}>
                 {val.ProductName}
               </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+              <Typography variant="body2" sx={{ color: "var(--color-text-light)", mb: 1.5 }}>
                 {val.Description}
               </Typography>
-               <Typography gutterBottom variant="h5" component="div">
+               <Typography gutterBottom variant="h5" component="div" sx={{ fontWeight: "bold", color: "var(--color-primary)" }}>
                 ₹{val.Price}
               </Typography>
             </CardContent>
             <CardActions>
-              <Link to='/wl'>
-              <Button size="small">wishlist</Button>
-              </Link>
-              <Link to='/crt'>
-              <Button size="small" onClick={() => addToCart(val)}>add to cart</Button>
-              </Link>
+             
+              <Button size="small" onClick={() => addToWishlist(val)}  sx={{ 
+                    backgroundColor: "var(--color-accent)", 
+                    color: "white", 
+                    "&:hover": { backgroundColor: "var(--color-highlight)" } 
+                  }}>wishlist</Button>
+              
+             
+              <Button size="small" onClick={() => addToCart(val)} sx={{ 
+                    backgroundColor: "var(--color-accent)", 
+                    color: "white", 
+                    "&:hover": { backgroundColor: "var(--color-highlight)" } 
+                  }}>add to cart</Button>
+              
             </CardActions>
           </Card>)
           
                })}
             </Grid>
-            <NavBar/>
+            
       </div>
   )
 }

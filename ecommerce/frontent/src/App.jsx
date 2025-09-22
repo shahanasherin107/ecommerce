@@ -14,6 +14,8 @@ import Wishlist from './components/Wishlist'
 import Admin from './components/Admin'
 import ViewPrdct from './components/ViewPrdct'
 import Add from './components/Add'
+import ViewOrder  from './components/ViewOrder'
+import { ViewUser } from './components/ViewUser'
 
 function App() 
 {
@@ -34,6 +36,8 @@ function App()
       <Route path='/admn' element={ <Admin/>}/>
       <Route path='/view' element={<ViewPrdct/>}/>
       <Route path='/add' element={<Add/>}/>
+       <Route path='/order' element={<ViewOrder/>}/>
+        <Route path='/user' element={<ViewUser/>}/>
       </Routes>
     
       

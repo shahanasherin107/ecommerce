@@ -1,22 +1,51 @@
-import { AppBar, Button, Toolbar } from '@mui/material'
+import { AppBar, Button, Toolbar, Typography } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Admin = () => {
   return (
     <div>
-       
-      <AppBar>
+      <AppBar  position="static" 
+      sx={{ 
+        backgroundColor: "var(--color-primary)", 
+        padding: "0.5rem 1rem" 
+      }}>
         <Toolbar>
-          <h4>Shoppee</h4>
-            <Link to='/add'>
-        <Button variant='contained'>Add</Button>
+          <Typography 
+          variant="h6" 
+          sx={{ flexGrow: 1, fontWeight: "bold", color: "white" }}
+         >Shoppee</Typography>
+         
+
+            <Link to='/add' style={{ textDecoration: "none" }}>
+        <Button variant='contained' sx={{ 
+                backgroundColor: "var(--color-accent)", 
+                "&:hover": { backgroundColor: "var(--color-highlight)" } 
+              }}>Add</Button>
         </Link> &nbsp; &nbsp;
-        <Link to='/view'>
-        <Button variant='contained'>View</Button>
+        <Link to='/view' style={{ textDecoration: "none" }}>
+        <Button variant='contained' sx={{ 
+                backgroundColor: "var(--color-accent)", 
+                "&:hover": { backgroundColor: "var(--color-highlight)" } 
+              }}>View</Button>
         </Link>&nbsp; &nbsp;
-        <Link to='/'>
-        <Button variant='contained'>LogOut</Button>
+        <Link to='/order' style={{ textDecoration: "none" }}>
+        <Button variant='contained' sx={{ 
+                backgroundColor: "var(--color-accent)", 
+                "&:hover": { backgroundColor: "var(--color-highlight)" } 
+              }}>Orders</Button>
+        </Link>&nbsp; &nbsp;
+        <Link to='/user' style={{ textDecoration: "none" }}>
+        <Button variant='contained' sx={{ 
+                backgroundColor: "var(--color-accent)", 
+                "&:hover": { backgroundColor: "var(--color-highlight)" } 
+              }}>Users</Button>
+        </Link>&nbsp; &nbsp;
+        <Link to='/' style={{ textDecoration: "none" }}>
+        <Button variant='contained' sx={{ 
+                backgroundColor: "var(--color-accent)", 
+                "&:hover": { backgroundColor: "var(--color-highlight)" } 
+              }}>LogOut</Button>
         </Link>
         </Toolbar>
       </AppBar>

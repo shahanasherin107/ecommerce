@@ -1,4 +1,4 @@
-import { AppBar, Button, Toolbar } from '@mui/material'
+import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import HomeIcon from '@mui/icons-material/Home';
@@ -9,32 +9,61 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 const NavBar = () => {
   return (
     <div>
-        <AppBar color='secondary'>
+        <AppBar      position="static" 
+      sx={{ 
+        backgroundColor: "var(--color-primary)", 
+        padding: "0.5rem 1rem" 
+      }}>
                 <Toolbar>
-                  <h4>Shoppee</h4>&nbsp;&nbsp;&nbsp;
-                  <Link to='/prdct'>
-                  <Button variant="contained">
+                  <Typography 
+          variant="h6" 
+          sx={{ flexGrow: 1, fontWeight: "bold", color: "white" }}
+         >Shoppee</Typography>
+         <Box sx={{ display: "flex", gap: 2 }}>
+
+                  <Link to='/prdct' style={{ textDecoration: "none" }}>
+                  <Button variant="contained" 
+              sx={{ 
+                backgroundColor: "var(--color-accent)", 
+                "&:hover": { backgroundColor: "var(--color-highlight)" } 
+              }}>
                    <HomeIcon /></Button>
                 </Link>&nbsp;&nbsp;&nbsp;
                  
-                <Link to='/wl'>
-               <Button variant="contained"><FavoriteIcon/>Wishlist</Button>
+                <Link to='/wl' style={{ textDecoration: "none" }}>
+               <Button variant="contained"
+              sx={{ 
+                backgroundColor: "var(--color-accent)", 
+                "&:hover": { backgroundColor: "var(--color-highlight)" } 
+              }}><FavoriteIcon/>Wishlist</Button>
                 </Link>&nbsp;&nbsp;&nbsp;
-                <Link to='/crt'>
-               <Button variant="contained"><ShoppingCartIcon/>Cart</Button>
+                <Link to='/crt' style={{ textDecoration: "none" }}>
+               <Button variant="contained"
+              sx={{ 
+                backgroundColor: "var(--color-accent)", 
+                "&:hover": { backgroundColor: "var(--color-highlight)" } 
+              }}><ShoppingCartIcon/>Cart</Button>
                 </Link>&nbsp;&nbsp;&nbsp;
                  
-                 <Link to='/pymnt'>
-                  <Button variant="contained">Payment</Button>
-                </Link>&nbsp;&nbsp;&nbsp;
+                 <Link to='/pymnt' style={{ textDecoration: "none" }}>
+                  <Button         variant="contained"
+              sx={{ 
+                backgroundColor: "var(--color-accent)", 
+                "&:hover": { backgroundColor: "var(--color-highlight)" } 
+              }}>Payment</Button>
+                </Link>
+                </Box>&nbsp;&nbsp;&nbsp;
                 
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  
-                  <Link to='/prfl'>
-                  <Button variant="contained"><AccountCircleIcon/></Button>
-                </Link>&nbsp;&nbsp;&nbsp;
+                 
+                  <Box sx={{ marginLeft: "auto" }}>
+                  <Link to='/prfl' style={{ textDecoration: "none" }}>
+                  <Button variant="contained" 
+              sx={{ 
+                backgroundColor: "var(--color-accent)", 
+                "&:hover": { backgroundColor: "var(--color-highlight)" } 
+              }}><AccountCircleIcon/></Button>
+                </Link>
+                </Box>&nbsp;&nbsp;&nbsp;
                 </Toolbar>
               </AppBar>
     </div>
