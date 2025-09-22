@@ -23,16 +23,19 @@ const Wishlist = () => {
   const fetchWishlist = () => {
     axios.get("http://localhost:3004/wishlist")
       .then((res) => setWishlist(res.data))
-      .catch((err) => console.error(err));
+      .catch((err) => console.error("Error fetching wishlist:", err));
   };
 
-  const removeFromWishlist = (id) => {
+
+
+
+ const deleteWishlistItem = (id) => {
     axios.delete(`http://localhost:3004/wishlist/${id}`)
       .then(() => {
-        alert("Removed from Wishlist!");
-        fetchWishlist();
+        alert("Item removed from Wishlist!");
+        fetchWishlist(); 
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error("Error deleting wishlist:", err));
   };
 
    const addToCart = (product) => {
@@ -82,7 +85,7 @@ const Wishlist = () => {
                     backgroundColor: "var(--color-accent)",
                     "&:hover": { backgroundColor: "var(--color-highlight)" },
                   }}
-                  onClick={() => removeFromWishlist(val._id)}
+                  onClick={() => deleteWishlistItem(val._id)}
                 >
                   <DeleteOutlineOutlinedIcon /> Remove
                 </Button>

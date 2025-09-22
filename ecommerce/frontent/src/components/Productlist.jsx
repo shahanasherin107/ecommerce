@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -16,11 +16,14 @@ import { Link } from 'react-router-dom';
 const Productlist = () => {
   var[product,setProduct]=useState([]);
       
-          axios.get("http://localhost:3004/view")
-          .then((res)=>{
-              console.log(res.data)
-              setProduct(res.data)
-          })
+         useEffect(() => {
+  axios.get("http://localhost:3004/view")
+    .then((res) => {
+      setProduct(res.data);
+    })
+    .catch((err) => console.error("Error fetching products:", err));
+}, []);
+
 
            const addToCart = (product) => {
     axios.post("http://localhost:3004/addcart", product)
@@ -28,14 +31,15 @@ const Productlist = () => {
       .catch((err) => console.error(err));
   };
 
-  const addToWishlist = (product) => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  axios.post("http://localhost:3004/addwishlist", {
-    ...product,
-    userId: user.id,
-  })
+ const addToWishlist = (val) => {
+    axios.post("http://localhost:3004/addwishlist", {
+      ProductName: val.ProductName,
+      Description: val.Description,
+      Price: val.Price,
+      Image: val.Image,
+    })
     .then(() => alert("Added to Wishlist!"))
-    .catch((err) => console.error(err));
+    .catch((err) => console.error("Error adding wishlist:", err));
 };
 
   return (

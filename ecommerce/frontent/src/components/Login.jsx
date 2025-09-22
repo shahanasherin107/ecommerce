@@ -28,7 +28,7 @@ const Login = () => {
         }))
 
         // Save user email in localStorage
-      localStorage.setItem("user", res.data.Email);
+      localStorage.setItem("user",JSON.stringify(response.data));
           
           if (res.data.userType === "admin") {
             navigate("/admn");

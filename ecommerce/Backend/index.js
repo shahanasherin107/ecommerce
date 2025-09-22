@@ -150,13 +150,26 @@ const orderModel = require("./model/order");
 // place order (after payment success)
 app.post("/order", async (req, res) => {
   try {
-    const newOrder = await orderModel.create(req.body);
+    const { userId, products, totalAmount, paymentMethod } = req.body;
+
+    if (!userId || !products || products.length === 0) {
+      return res.status(400).send({ message: "Invalid order data" });
+    }
+
+    const newOrder = await orderModel.create({
+      userId,
+      products,
+      totalAmount,
+      paymentMethod,
+    });
+
     res.send({ message: "Order placed successfully!", order: newOrder });
   } catch (error) {
-    console.error(error);
+    console.error("Order error:", error);
     res.status(500).send({ message: "Error placing order" });
   }
 });
+
 
 // get all orders with user details
 app.get("/order", async (req, res) => {
@@ -171,39 +184,57 @@ app.get("/order", async (req, res) => {
 
 const wishlistModel = require("./model/wishlist");
 
+
 //  Add to wishlist
 app.post("/addwishlist", async (req, res) => {
   try {
-    await wishlistModel.create(req.body);
-    res.send({ message: "Product added to wishlist!" });
+    const { ProductName, Description, Price, Image } = req.body;
+
+    
+    if (!ProductName || !Price || !Image) {
+      return res.status(400).send({ message: "Missing required fields" });
+    }
+
+    
+    const newItem = new wishlistModel({
+      ProductName,
+      Description: Description || "",
+      Price,
+      Image,
+    });
+
+    await newItem.save();
+
+    res.send({ message: "Product added to wishlist!", item: newItem });
   } catch (error) {
-    console.error(error);
+    console.error("Error adding to wishlist:", error);
     res.status(500).send({ message: "Error adding product to wishlist" });
   }
 });
 
-//  Get wishlist (all)
+//  Get wishlist 
 app.get("/wishlist", async (req, res) => {
   try {
-    const wishlistItems = await wishlistModel.find().populate("userId", "Name Email");
+    const wishlistItems = await wishlistModel.find();
     res.send(wishlistItems);
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching wishlist:", error);
     res.status(500).send({ message: "Error fetching wishlist items" });
   }
 });
+
+
 
 //  Remove from wishlist
 app.delete("/wishlist/:id", async (req, res) => {
   try {
     await wishlistModel.findByIdAndDelete(req.params.id);
-    res.status(200).send({ message: "Product removed from wishlist" });
+    res.send({ message: "Wishlist item deleted!" });
   } catch (error) {
-    console.error(error);
-    res.status(500).send({ message: "Error removing product from wishlist" });
+    console.error("Error deleting wishlist:", error);
+    res.status(500).send({ message: "Error deleting wishlist item" });
   }
 });
-
 //  Get all users
 app.get("/users", async (req, res) => {
   try {

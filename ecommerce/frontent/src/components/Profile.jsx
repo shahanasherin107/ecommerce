@@ -9,12 +9,11 @@ const Profile = () => {
 
   useEffect(() => {
     
-    const user = localStorage.getItem("user");
+    const email = localStorage.getItem("user");
 
     if (email) {
       axios.get(`http://localhost:3004/user/${email}`)
         .then(res => {
-          setUser(res.data);
           setUser(res.data);
         })
         .catch(err => console.log(err));
