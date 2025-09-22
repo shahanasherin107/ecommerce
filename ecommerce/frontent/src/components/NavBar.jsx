@@ -18,7 +18,7 @@ const NavBar = () => {
                   <Typography 
           variant="h6" 
           sx={{ flexGrow: 1, fontWeight: "bold", color: "white" }}
-         >Shoppee</Typography>
+         >Decora</Typography>
          <Box sx={{ display: "flex", gap: 2 }}>
 
                   <Link to='/prdct' style={{ textDecoration: "none" }}>

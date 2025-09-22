@@ -9,7 +9,7 @@ const Profile = () => {
 
   useEffect(() => {
     
-    const email = localStorage.getItem("userEmail");
+    const user = localStorage.getItem("user");
 
     if (email) {
       axios.get(`http://localhost:3004/user/${email}`)

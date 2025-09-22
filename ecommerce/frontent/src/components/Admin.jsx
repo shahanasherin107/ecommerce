@@ -12,9 +12,9 @@ const Admin = () => {
       }}>
         <Toolbar>
           <Typography 
-          variant="h6" 
+          variant="h4" 
           sx={{ flexGrow: 1, fontWeight: "bold", color: "white" }}
-         >Shoppee</Typography>
+         >Decora</Typography>
          
 
             <Link to='/add' style={{ textDecoration: "none" }}>

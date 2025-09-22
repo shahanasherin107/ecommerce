@@ -49,9 +49,10 @@ const Add = () => {
   return (
     <div>
       <Admin/>
-        <Typography variant='h4'>Add Product</Typography><br />
-
-        <TextField variant='outlined' label="Product Name"
+       <Typography variant="h5" sx={{ fontWeight: "bold", color: "var(--color-primary)" }}>
+          Add Product
+        </Typography><br /><br />
+        <TextField  variant='outlined' label="Product Name"
         name="ProductName" value={input.ProductName} onChange={inputHandeler} /><br /><br />
 
           <TextField variant='outlined' label="Description"
@@ -63,7 +64,12 @@ const Add = () => {
            <TextField variant='outlined' label="Image"
            name="Image" value={input.Image} onChange={inputHandeler}/><br /><br />
 
-        <Button variant='contained' onClick={addHandler}>add</Button>
+        <Button variant="contained"
+            sx={{
+              mt: 3,
+              backgroundColor: "#e07a5f",
+              "&:hover": { backgroundColor: "#c44536" },
+            }} onClick={addHandler}>add</Button>
     </div>
   )
 }
